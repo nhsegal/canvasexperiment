@@ -1,6 +1,6 @@
 class Link {
-  constructor(p, x, linkSize) {
-    this.p = p;
+  constructor(ctx, x, linkSize) {
+    this.ctx = ctx;
     this.x = x;
     this.y = 0;
     this.py = 0;
@@ -8,11 +8,12 @@ class Link {
     this.linkSize = linkSize;
   }
 
-  display() {
-    const p = this.p;
-    p.fill(0);
-    p.noStroke();
-    p.circle(this.x + 0.5, this.y + p.height / 2 + 0.5, this.linkSize - 0.5);
+  display(scale) {
+    this.ctx.scale(scale, scale);
+    this.ctx.fillStyle = 'black';
+    let circle = new Path2D(); // <<< Declaration
+    circle.arc(this.x, this.x, this.linkSize, 0, 2 * Math.PI, false);
+    this.ctx.fill(circle); //   <<< pass circle to context
   }
 }
 

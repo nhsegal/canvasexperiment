@@ -1,5 +1,4 @@
-const drawBackground = (canvas, width, height) => {
-  const scale = window.devicePixelRatio;
+const drawBackground = (canvas, width, height, scale) => {
   canvas.width = Math.floor(width * scale);
   canvas.height = Math.floor(height * scale);
   const ctx = canvas.getContext('2d');

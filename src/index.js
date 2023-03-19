@@ -1,11 +1,40 @@
 import buildCanvas from './buildHTML';
-import drawBackground from './drawBackground';
+// import drawBackground from './drawBackground';
+// import Link from './Link';
 
 const width = 900;
 const height = 300;
+const scale = window.devicePixelRatio;
 buildCanvas(width, height);
 const canvas = document.getElementById('canvas');
-drawBackground(canvas, width, height);
+const ctx = canvas.getContext('2d');
+// drawBackground(ctx, width, height, scale);
+// const testLink = new Link(ctx, 10, 5);
+// testLink.display(scale);
+ctx.scale(scale, scale);
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+ctx.stroke();
+
+function drawCircle(x, y, radius, fill, stroke, strokeWidth) {
+  // ctx.scale(scale, scale);
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+
+  if (fill) {
+    ctx.fillStyle = fill;
+    ctx.fill();
+    // ctx.fillRect(0, 0, 20, 20);
+  }
+  if (stroke) {
+    ctx.lineWidth = strokeWidth;
+    ctx.strokeStyle = stroke;
+    ctx.stroke();
+  }
+}
+
+drawCircle(ctx, 150, 150, 25, 'black', 'red', 2);
 /*
 import Chain from './Chain';
 import Pen from './Pen';
