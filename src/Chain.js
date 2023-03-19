@@ -1,8 +1,8 @@
 import Link from './Link';
 
 class Chain {
-  constructor(p, length, dx, dt) {
-    this.p = p;
+  constructor(ctx, length, dx, dt) {
+    this.ctx = ctx;
     this.length = length;
     this.linkSize = dx;
     this.links = [];
@@ -10,31 +10,29 @@ class Chain {
 
     for (let i = 0; i < this.length / this.linkSize; i += 1) {
       this.links.push(new Link(
-        p,
-        i * this.linkSize + this.linkSize / 2,
+        this.ctx,
+        i * 2 * this.linkSize,
         dx
       ));
     }
   }
 
-  display(end, dragging) {
-    const p = this.p;
+  display() {
+    // const ctx = this.ctx;
     for (let i = 0; i < this.links.length - 1; i += 1) {
+      /*
       if (i === 0) {
         if (dragging) {
-          p.fill(250, 0, 0);
-        } else { p.fill(200, 0, 0); }
-        p.noStroke();
-        p.circle(
-          Math.floor(this.links[0].x + this.links[0].linkSize) + 0.5,
-          Math.floor(this.links[0].y + p.height / 2) + 0.5,
-          Math.floor(this.links[0].linkSize * 3) + 0.5
-        );
+          ctx.fill(250, 0, 0);
+        } else { ctx.fill(200, 0, 0); }
+        ctx.noStroke();
+        ctx.circle();
       } else {
-        this.links[i].display();
-      }
+        */
+      this.links[i].display();
+      // }
     }
-
+    /*
     if (end === 'fixed') {
       p.fill(0, 0, 240);
     } else if (end === 'free') {
@@ -48,6 +46,7 @@ class Chain {
       this.links[this.links.length - 1].y + p.height / 2,
       2 * this.linkSize
     );
+    */
   }
 
   move(end, dragging) {
