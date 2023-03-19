@@ -1,6 +1,5 @@
 import buildCanvas from './buildHTML';
 import drawBackground from './drawBackground';
-
 import Chain from './Chain';
 
 const width = 900;
@@ -9,29 +8,29 @@ const scale = window.devicePixelRatio;
 buildCanvas(width, height);
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const testChain = new Chain(ctx, width * scale, 8, 4);
+const testChain = new Chain(ctx, width, 8, 4);
 
-drawBackground(canvas, width, height, scale);
+const mouseOverFirstLink = (e) => {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  console.log(x, y);
+};
 
-ctx.setTransform(1, 0, 0, 1, 0, canvas.height / 2);
-testChain.display();
+canvas.addEventListener('mouseover', mouseOverFirstLink);
 
+const draw = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground(canvas, width, height, scale);
+  ctx.setTransform(1, 0, 0, 1, 0, canvas.height / 2);
+  testChain.move('fixed', true);
+  testChain.display();
+  window.requestAnimationFrame(draw);
+};
+
+draw();
 /*
-
-import Pen from './Pen';
-import Q5 from 'q5xjs';
-let q5 = new Q5();
-
-// Chain constructor(q5, length, dx, r)
-const width = 900;
-const dt = 5;
-const dx = 5;
-const chain = new Chain(q5, width, dx, dt);
-let dragging = false;
-let end = 'fixed';
-let level = 0;
-let mySound;
-const pens = [];
 
 const levelSet = () => {
   switch (level) {

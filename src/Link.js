@@ -1,3 +1,4 @@
+import circle from './circle';
 class Link {
   constructor(ctx, x, linkSize) {
     this.ctx = ctx;
@@ -10,11 +11,7 @@ class Link {
 
   display() {
     const ctx = this.ctx;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.linkSize, 0, 2 * Math.PI);
-    ctx.fillStyle = 'rgb(0,0,0)';
-    ctx.fill();
+    circle(ctx, this.x, this.y, this.linkSize, 'rgb(0,0,0)');
   }
 }
 

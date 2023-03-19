@@ -1,4 +1,5 @@
 import Link from './Link';
+import circle from './circle';
 
 class Chain {
   constructor(ctx, length, dx, dt) {
@@ -15,38 +16,38 @@ class Chain {
         dx
       ));
     }
+    // EventListeners on first link
   }
 
-  display() {
-    // const ctx = this.ctx;
+  display(end, dragging) {
+    const ctx = this.ctx;
     for (let i = 0; i < this.links.length - 1; i += 1) {
-      /*
       if (i === 0) {
         if (dragging) {
-          ctx.fill(250, 0, 0);
-        } else { ctx.fill(200, 0, 0); }
-        ctx.noStroke();
-        ctx.circle();
+          circle(ctx, 0, 0, 3 * this.linkSize, 'rgb(250, 0, 0)');
+        } else {
+          circle(ctx, 0, 0, 3 * this.linkSize, 'rgb(200, 0, 0)');
+        }
       } else {
-        */
-      this.links[i].display();
-      // }
+        this.links[i].display();
+      }
     }
-    /*
+    let lastLinkColor = 'rgb(250, 0, 0)';
     if (end === 'fixed') {
-      p.fill(0, 0, 240);
+      lastLinkColor = 'rgb(0, 0, 240)';
     } else if (end === 'free') {
-      p.fill(0, 200, 0);
+      lastLinkColor = 'rgb(0, 200, 0)';
     } else if (end === 'mirror') {
-      p.fill(200, 0, 0);
+      lastLinkColor = 'rgb(200, 0, 0)';
     }
 
-    p.circle(
+    circle(
+      ctx,
       this.links[this.links.length - 1].x,
-      this.links[this.links.length - 1].y + p.height / 2,
-      2 * this.linkSize
+      this.links[this.links.length - 1].y,
+      2 * this.linkSize,
+      lastLinkColor
     );
-    */
   }
 
   move(end, dragging) {
