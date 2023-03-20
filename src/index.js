@@ -8,24 +8,81 @@ const scale = window.devicePixelRatio;
 buildCanvas(width, height);
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const testChain = new Chain(ctx, width, 8, 4);
+const chain = new Chain(ctx, width, 8, 4);
 
+/*
 const mouseOverFirstLink = (e) => {
   e.preventDefault();
   const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const x = parseInt(e.clientX - rect.left, 10);
+  const y = parseInt(e.clientY - rect.top, 10);
   console.log(x, y);
 };
+*/
 
-canvas.addEventListener('mouseover', mouseOverFirstLink);
+const mouseOverFirstLink = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const rect = canvas.getBoundingClientRect();
+  const x = parseInt(e.clientX - rect.left, 10);
+  const y = parseInt(e.clientY - rect.top, 10) - height / 2;
+  if (x * x - chain.links[0].x * chain.links[0].x
+     + y * y - chain.links[0].y * chain.links[0].y
+    < (chain.linkSize * chain.linkSize) * 9) {
+    chain.isDragging = true;
+  } else {
+    chain.isDragging = false;
+  }
+};
+
+const mouseMove = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const rect = canvas.getBoundingClientRect();
+  const x = parseInt(e.clientX - rect.left, 10);
+  const y = parseInt(e.clientY - rect.top, 10) - height / 2;
+  if (chain.isDragging) {
+    chain.links[0].x = x;
+    chain.links[0].y = y;
+  }
+};
+
+const mouseUp = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  chain.isDragging = false;
+};
+
+/*
+function handleMouseMove(e) {
+  e.preventDefault();
+  var mouseX = parseInt(e.clientX - offsetX);
+  var mouseY = parseInt(e.clientY - offsetY);
+
+  var dx = mouseX - circle.cx;
+  var dy = mouseY - circle.cy;
+  var isInside = dx * dx + dy * dy <= circle.radius * circle.radius;
+
+  if (isInside && !circle.wasInside) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCircle(circle, isInside);
+  } else if (!isInside && circle.wasInside) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCircle(circle, isInside);
+  }
+}
+
+*/
+canvas.addEventListener('mousedown', mouseOverFirstLink);
+canvas.addEventListener('mousemove', mouseMove);
+canvas.addEventListener('mouseup', mouseUp);
 
 const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground(canvas, width, height, scale);
   ctx.setTransform(1, 0, 0, 1, 0, canvas.height / 2);
-  testChain.move('fixed', true);
-  testChain.display();
+  chain.move('fixed', true);
+  chain.display();
   window.requestAnimationFrame(draw);
 };
 

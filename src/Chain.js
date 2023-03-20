@@ -8,6 +8,7 @@ class Chain {
     this.linkSize = dx;
     this.links = [];
     this.dt = dt;
+    this.isDragging = false;
 
     for (let i = 0; i < this.length / this.linkSize; i += 1) {
       this.links.push(new Link(
@@ -16,17 +17,16 @@ class Chain {
         dx
       ));
     }
-    // EventListeners on first link
   }
 
-  display(end, dragging) {
+  display(end) {
     const ctx = this.ctx;
     for (let i = 0; i < this.links.length - 1; i += 1) {
       if (i === 0) {
-        if (dragging) {
-          circle(ctx, 0, 0, 3 * this.linkSize, 'rgb(250, 0, 0)');
+        if (this.isDragging) {
+          circle(ctx, this.links[i].x, this.links[i].y, 3 * this.linkSize, 'rgb(250, 0, 0)');
         } else {
-          circle(ctx, 0, 0, 3 * this.linkSize, 'rgb(200, 0, 0)');
+          circle(ctx, this.links[i].x, this.links[i].y, 3 * this.linkSize, 'rgb(200, 0, 0)');
         }
       } else {
         this.links[i].display();
@@ -50,8 +50,7 @@ class Chain {
     );
   }
 
-  move(end, dragging) {
-    const p = this.p;
+  move(end) {
     for (let i = 1; i < this.links.length - 1; i += 1) {
       this.links[i].fy = ((this.dt / this.linkSize) ** 2)
       * (this.links[i - 1].y - 2 * this.links[i].y + this.links[i + 1].y)
@@ -65,19 +64,19 @@ class Chain {
         - this.links[this.links.length - 1].py;
     } else if (end === 'fixed') {
       this.links[this.links.length - 1].fy = 0;
-    } else if (end === 'mirror' && p.mouseIsPressed) {
+    } else if (end === 'mirror' && this.isDragging) {
       this.links[this.links.length - 1].fy = this.links[0].fy;
-    } else if (end === 'mirror' && !p.mouseIsPressed) {
+    } else if (end === 'mirror' && !this.isDragging) {
       this.links[this.links.length - 1].fy = this.links[this.links.length - 2].y;
       this.links[this.links.length - 1].y = this.links[this.links.length - 1].fy;
-    } else if (end === 'antimirror' && p.mouseIsPressed) {
+    } else if (end === 'antimirror' && this.isDragging) {
       this.links[this.links.length - 1].fy = -this.links[0].fy;
-    } else if (end === 'antimirror' && !p.mouseIsPressed) {
+    } else if (end === 'antimirror' && !this.isDragging) {
       this.links[this.links.length - 1].fy = this.links[this.links.length - 2].y;
       this.links[this.links.length - 1].y = this.links[this.links.length - 1].fy;
     }
 
-    if (!dragging) {
+    if (!this.isDragging) {
       this.links[0].fy = this.links[1].y;
       this.links[0].y = this.links[0].fy;
     }
