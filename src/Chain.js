@@ -5,16 +5,16 @@ class Chain {
   constructor(ctx, length, dx, dt) {
     this.ctx = ctx;
     this.length = length;
-    this.linkSize = dx;
+    this.linkSize = 2 * dx;
     this.links = [];
-    this.dt = dt;
+    this.dt = 2 * dt;
     this.isDragging = false;
 
     for (let i = 0; i < this.length / this.linkSize; i += 1) {
       this.links.push(new Link(
         this.ctx,
-        i * 2 * this.linkSize,
-        dx
+        i * 1 * this.linkSize,
+        8 * dx
       ));
     }
   }
@@ -28,7 +28,7 @@ class Chain {
         } else {
           circle(ctx, this.links[i].x, this.links[i].y, 3 * this.linkSize, 'rgb(200, 0, 0)');
         }
-      } else {
+      } else if (i % 8 === 0) {
         this.links[i].display();
       }
     }

@@ -8,7 +8,7 @@ const scale = window.devicePixelRatio;
 buildCanvas(width, height);
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-const chain = new Chain(ctx, width, 8, 4);
+const chain = new Chain(ctx, 2 * width, 1, 1);
 
 /*
 const mouseOverFirstLink = (e) => {
