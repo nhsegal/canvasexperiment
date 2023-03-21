@@ -1,46 +1,48 @@
 import hitSound from './cowbell.wav';
 
 class Pen {
-  constructor(p, x, y, c) {
-    this.p = p;
+  constructor({
+    ctx, x, y, c
+  }) {
+    this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.r = 10;
-    this.color = c;// this.p.color(c);
+    this.color = c;// this.ctx.color(c);
     this.hit = false;
     this.effect = new Audio(hitSound);
     this.effect.load();
   }
 
   display() {
-    const p = this.p;
-    p.fill(this.color);
-    p.noStroke();
+    const ctx = this.ctx;
+    ctx.fill(this.color);
+    ctx.noStroke();
     if (this.hit) {
-      if (this.y > p.height / 2) {
-        p.rect(this.x, this.y, this.r, this.r * 5);
-      } else if (this.y < p.height / 2) {
-        p.rect(this.x, this.y - this.r * 5, this.r, this.r * 5);
+      if (this.y > ctx.height / 2) {
+        ctx.rect(this.x, this.y, this.r, this.r * 5);
+      } else if (this.y < ctx.height / 2) {
+        ctx.rect(this.x, this.y - this.r * 5, this.r, this.r * 5);
       }
     } else {
-      p.circle(this.x, this.y, this.r);
+      ctx.circle(this.x, this.y, this.r);
     }
   }
 
   hitCheck(chain) {
-    const p = this.p;
+    const ctx = this.ctx;
     if (
 
       ((this.x > chain.links[Math.floor(this.x / chain.linkSize)].x - chain.linkSize)
       && (this.x < chain.links[Math.floor(this.x / chain.linkSize)].x + chain.linkSize)
 
       && (((this.y > chain.links[Math.floor(this.x / chain.linkSize)].y - chain.linkSize
-          + p.height / 2)
-      && (this.y < p.height / 2))
+          + ctx.height / 2)
+      && (this.y < ctx.height / 2))
 
       || ((this.y < chain.links[Math.floor(this.x / chain.linkSize)].y + chain.linkSize
-          + p.height / 2
-      && (this.y > p.height / 2)))))
+          + ctx.height / 2
+      && (this.y > ctx.height / 2)))))
       && this.hit === false
 
     ) {

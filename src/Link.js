@@ -1,6 +1,6 @@
 import circle from './circle';
 class Link {
-  constructor(ctx, x, linkSize) {
+  constructor({ ctx, x, linkSize }) {
     this.ctx = ctx;
     this.x = x;
     this.y = 0;
@@ -9,9 +9,9 @@ class Link {
     this.linkSize = linkSize;
   }
 
-  display() {
+  display(color) {
     const ctx = this.ctx;
-    circle(ctx, this.x, this.y, this.linkSize, 'rgb(0,0,0)');
+    circle(ctx, this.x, this.y, this.linkSize, color);
   }
 }
 

@@ -2,36 +2,49 @@ import Link from './Link';
 import circle from './circle';
 
 class Chain {
-  constructor(ctx, length, dx, dt) {
+  constructor({
+    ctx, length, dx, dt
+  }) {
     this.ctx = ctx;
     this.length = length;
-    this.linkSize = 2 * dx;
+    this.linkSize = dx;
     this.links = [];
-    this.dt = 2 * dt;
+    this.dt = dt;
     this.isDragging = false;
 
-    for (let i = 0; i < this.length / this.linkSize; i += 1) {
+    this.links.push(new Link({
+      ctx: this.ctx,
+      x: this.linkSize * 2,
+      linkSize: 2 * this.linkSize
+    }));
+
+    for (let i = 1; i < this.length / this.linkSize; i += 1) {
       this.links.push(new Link(
-        this.ctx,
-        i * 1 * this.linkSize,
-        8 * dx
+        {
+          ctx: this.ctx,
+          x: i * dx + 2 * this.linkSize,
+          linkSize: this.linkSize
+        }
       ));
     }
   }
 
   display(end) {
     const ctx = this.ctx;
-    for (let i = 0; i < this.links.length - 1; i += 1) {
-      if (i === 0) {
-        if (this.isDragging) {
-          circle(ctx, this.links[i].x, this.links[i].y, 3 * this.linkSize, 'rgb(250, 0, 0)');
-        } else {
-          circle(ctx, this.links[i].x, this.links[i].y, 3 * this.linkSize, 'rgb(200, 0, 0)');
-        }
-      } else if (i % 8 === 0) {
-        this.links[i].display();
+    for (let i = 1; i < this.links.length - 1; i += 1) {
+      if (i % 48 === 0) {
+        this.links[i].display('rgb(250,235,0');
+      } else if (i % (2) === 0) {
+        this.links[i].display('rgb(0,0,0');
       }
     }
+
+    if (this.isDragging) {
+      circle(ctx, this.links[0].x, this.links[0].y, this.links[0].linkSize, 'rgb(250, 0, 0)');
+    } else {
+      circle(ctx, this.links[0].x, this.links[0].y, this.links[0].linkSize, 'rgb(180, 0, 0)');
+    }
+
     let lastLinkColor = 'rgb(250, 0, 0)';
     if (end === 'fixed') {
       lastLinkColor = 'rgb(0, 0, 240)';
