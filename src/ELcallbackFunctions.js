@@ -44,20 +44,29 @@ const releaseChain = (chain, e) => {
   chain.isDragging = false;
 };
 
-const levelSet = (level, pens, ctx, canvas) => {
+const levelSet = (level, pens, ctx, canvas, scale) => {
+  let color = 'rgb(0,0,0)';
   switch (level) {
     case '1':
       pens.length = 0;
-      for (let i = 0; i < 2; i += 1) {
+      for (let i = 0; i < 4; i += 1) {
+        if (i === 3) {
+          color = 'rgb(250,130,0)';
+        } else {
+          color = 'rgb(200,0,200)';
+        }
         pens.push(
-          new Pen(ctx, 0, 250, 'rgb(0,0,0)')
+          new Pen({
+
+            ctx,
+            x: (i + 3.75)
+             * (parseInt(canvas.width, 10) / 7),
+            y: -canvas.height / 4,
+            c: color
+          })
         );
       }
 
-      pens[0].x = parseInt(canvas.width, 10) - 20;
-      pens[0].y = 40;
-      pens[1].x = parseInt(canvas.width, 10) / 2;
-      pens[1].y = ctx.height / 4;
       return pens;
       /*
     case '2':

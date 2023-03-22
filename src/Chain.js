@@ -3,7 +3,7 @@ import circle from './circle';
 
 class Chain {
   constructor({
-    ctx, length, dx, dt
+    ctx, length, dx, dt, scale
   }) {
     this.ctx = ctx;
     this.length = length;
@@ -11,6 +11,7 @@ class Chain {
     this.links = [];
     this.dt = dt;
     this.isDragging = false;
+    this.scale = scale;
 
     this.links.push(new Link({
       ctx: this.ctx,

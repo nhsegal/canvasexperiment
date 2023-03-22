@@ -1,10 +1,13 @@
 import hitSound from './cowbell.wav';
+import circle from './circle';
 
 class Pen {
   constructor({
-    ctx, x, y, c
+    canvas, ctx, x, y, c, scale
   }) {
+    this.canvas = canvas;
     this.ctx = ctx;
+    this.scale = scale;
     this.x = x;
     this.y = y;
     this.r = 10;
@@ -16,8 +19,8 @@ class Pen {
 
   display() {
     const ctx = this.ctx;
-    ctx.fill(this.color);
-    ctx.noStroke();
+
+    ctx.fillStyle = this.color;
     if (this.hit) {
       if (this.y > ctx.height / 2) {
         ctx.rect(this.x, this.y, this.r, this.r * 5);
@@ -25,27 +28,37 @@ class Pen {
         ctx.rect(this.x, this.y - this.r * 5, this.r, this.r * 5);
       }
     } else {
-      ctx.circle(this.x, this.y, this.r);
+      circle(ctx, this.x, this.y, this.r, this.c);
     }
   }
 
   hitCheck(chain) {
-    const ctx = this.ctx;
+    // const canvas = this.canvas;
+
+    console.log(
+      this.y,
+      chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y
+    );
+
     if (
+      this.x
+      > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
 
-      ((this.x > chain.links[Math.floor(this.x / chain.linkSize)].x - chain.linkSize)
-      && (this.x < chain.links[Math.floor(this.x / chain.linkSize)].x + chain.linkSize)
+      && this.x
+        < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
 
-      && (((this.y > chain.links[Math.floor(this.x / chain.linkSize)].y - chain.linkSize
-          + ctx.height / 2)
-      && (this.y < ctx.height / 2))
+      && this.y
+       > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
 
-      || ((this.y < chain.links[Math.floor(this.x / chain.linkSize)].y + chain.linkSize
-          + ctx.height / 2
-      && (this.y > ctx.height / 2)))))
+     && (this.y < 100)
+    /*
+      || ((this.y < chain.links[Math.floor(this.x / (2 * chain.linkSize))].y + chain.linkSize
+          + canvas.height / 2
+      && (this.y > canvas.height / 2)))))
       && this.hit === false
-
+*/
     ) {
+      console.log('hasdfa');
       this.hit = true;
       this.effect.play();
     }
