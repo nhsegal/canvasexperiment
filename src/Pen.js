@@ -35,24 +35,18 @@ class Pen {
     if (
       ((this.x
       > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
-
       && this.x
         < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
-
       && this.y
        > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
-
-     && (this.y < 10))
+     && (this.y < -2))
       || (this.x
         > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
-
         && this.x
           < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
-
         && this.y
-         < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
-
-       && (this.y > 10)))
+         < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y + 2 * chain.linkSize
+       && (this.y > 0)))
       && this.hit === false
 
     ) {
