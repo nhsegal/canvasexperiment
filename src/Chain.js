@@ -50,7 +50,7 @@ class Chain {
     if (end === 'fixed') {
       lastLinkColor = 'rgb(0, 0, 0)';
     } else if (end === 'free') {
-      lastLinkColor = 'rgb(250, 250, 250)';
+      lastLinkColor = 'rgb(200, 120, 240)';
     } else if (end === 'mirror') {
       lastLinkColor = 'rgb(0, 190, 0)';
     } else if (end === 'antimirror') {

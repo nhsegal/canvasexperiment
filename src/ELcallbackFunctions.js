@@ -149,8 +149,11 @@ const levelSet = (level, pens, ctx, canvas) => {
 
     case '6':
       pens.length = 0;
-      for (let i = 0; i < 10; i += 1) {
-        if (i === 4 || i === 5) {
+      for (let i = 0; i < 26; i += 1) {
+        if (i === 0 || i === 1
+          || i === 12 || i === 13
+          || i === 24 || i === 25
+        ) {
           color = 'rgb(250,130,0)';
         } else {
           color = 'rgb(200,0,200)';
@@ -159,7 +162,7 @@ const levelSet = (level, pens, ctx, canvas) => {
           new Pen({
             ctx,
             x: (Math.floor(i / 2))
-               * (parseInt(canvas.width, 10) / 10) + canvas.width / 3.3,
+               * (parseInt(canvas.width, 10) / 12.5) + canvas.width / 48,
             y: (canvas.height / 4) - (i % 2) * (canvas.height / 2),
             c: color
           })
