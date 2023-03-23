@@ -1,5 +1,5 @@
 const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -44,8 +44,8 @@ module.exports = {
 
   // plugins
   plugins: [
-    new htmlWebpackPlugin({
-      title: 'Linearizng Data',
+    new HtmlWebpackPlugin({
+      title: 'The Wave Game',
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/template.html')
     }),

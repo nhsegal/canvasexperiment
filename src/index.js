@@ -9,6 +9,7 @@ import {
   reset,
   levelSet
 } from './ELcallbackFunctions';
+import checkForWin from './checkForWin';
 
 const width = 8 * 120;
 const height = 300;
@@ -66,6 +67,7 @@ const draw = () => {
       pen.hitCheck(chain);
       pen.display();
     });
+    checkForWin(pens);
   }
   window.requestAnimationFrame(draw);
 };
