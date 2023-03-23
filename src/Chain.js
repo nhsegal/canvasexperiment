@@ -48,11 +48,13 @@ class Chain {
 
     let lastLinkColor = 'rgb(250, 0, 0)';
     if (end === 'fixed') {
-      lastLinkColor = 'rgb(0, 0, 240)';
+      lastLinkColor = 'rgb(0, 0, 0)';
     } else if (end === 'free') {
-      lastLinkColor = 'rgb(0, 200, 0)';
+      lastLinkColor = 'rgb(250, 250, 250)';
     } else if (end === 'mirror') {
-      lastLinkColor = 'rgb(200, 0, 0)';
+      lastLinkColor = 'rgb(0, 190, 0)';
+    } else if (end === 'antimirror') {
+      lastLinkColor = 'rgb(0, 30, 220)';
     }
 
     circle(
@@ -79,12 +81,16 @@ class Chain {
     } else if (end === 'fixed') {
       this.links[this.links.length - 1].fy = 0;
     } else if (end === 'mirror' && this.isDragging) {
-      this.links[this.links.length - 1].fy = this.links[0].fy;
+      this.links[this.links.length - 1].fy = this.links[0].y;
+      this.links[this.links.length - 1].y = this.links[0].y;
+      this.links[this.links.length - 1].py = this.links[0].y;
     } else if (end === 'mirror' && !this.isDragging) {
       this.links[this.links.length - 1].fy = this.links[this.links.length - 2].y;
       this.links[this.links.length - 1].y = this.links[this.links.length - 1].fy;
     } else if (end === 'antimirror' && this.isDragging) {
-      this.links[this.links.length - 1].fy = -this.links[0].fy;
+      this.links[this.links.length - 1].fy = -this.links[0].y;
+      this.links[this.links.length - 1].y = -this.links[0].y;
+      this.links[this.links.length - 1].py = -this.links[0].y;
     } else if (end === 'antimirror' && !this.isDragging) {
       this.links[this.links.length - 1].fy = this.links[this.links.length - 2].y;
       this.links[this.links.length - 1].y = this.links[this.links.length - 1].fy;

@@ -19,7 +19,6 @@ class Pen {
 
   display() {
     const ctx = this.ctx;
-
     ctx.fillStyle = this.color;
     if (this.hit) {
       if (this.y > ctx.height / 2) {
@@ -33,15 +32,8 @@ class Pen {
   }
 
   hitCheck(chain) {
-    // const canvas = this.canvas;
-
-    console.log(
-      this.y,
-      chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y
-    );
-
     if (
-      this.x
+      ((this.x
       > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
 
       && this.x
@@ -50,17 +42,23 @@ class Pen {
       && this.y
        > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
 
-     && (this.y < 100)
-    /*
-      || ((this.y < chain.links[Math.floor(this.x / (2 * chain.linkSize))].y + chain.linkSize
-          + canvas.height / 2
-      && (this.y > canvas.height / 2)))))
+     && (this.y < 10))
+      || (this.x
+        > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
+
+        && this.x
+          < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
+
+        && this.y
+         < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
+
+       && (this.y > 10)))
       && this.hit === false
-*/
+
     ) {
-      console.log('hasdfa');
       this.hit = true;
       this.effect.play();
+      return true;
     }
     return false;
   }

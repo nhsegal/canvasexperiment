@@ -44,7 +44,7 @@ const releaseChain = (chain, e) => {
   chain.isDragging = false;
 };
 
-const levelSet = (level, pens, ctx, canvas, scale) => {
+const levelSet = (level, pens, ctx, canvas) => {
   let color = 'rgb(0,0,0)';
   switch (level) {
     case '1':
@@ -57,114 +57,116 @@ const levelSet = (level, pens, ctx, canvas, scale) => {
         }
         pens.push(
           new Pen({
-
             ctx,
-            x: (i + 3.75)
+            x: (i + 3.8)
              * (parseInt(canvas.width, 10) / 7),
             y: -canvas.height / 4,
             c: color
           })
         );
       }
-
       return pens;
-      /*
     case '2':
       pens.length = 0;
-      for (let i = 0; i < 3; i += 1) {
-        pens.push(new Pen(ctx, 0, 250, q5.color(0)));
+      for (let i = 0; i < 4; i += 1) {
+        if (i !== 3) {
+          color = 'rgb(250,130,0)';
+        } else {
+          color = 'rgb(200,0,200)';
+        }
+        pens.push(
+          new Pen({
+            ctx,
+            x: (i + 3.8)
+             * (parseInt(canvas.width, 10) / 7),
+            y: -canvas.height / 4,
+            c: color
+          })
+        );
       }
-
-      pens[0].x = q5.width - 100;
-      pens[0].y = (3.5 * q5.height) / 5;
-      pens[0].color = q5.color(100, 0, 200);
-      pens[1].x = q5.width - 30;
-      pens[1].y = (1.5 * q5.height) / 5;
-      pens[1].color = q5.color(250, 100, 0);
-      pens[2].x = q5.width - 100;
-      pens[2].y = (1.5 * q5.height) / 5;
-      pens[2].color = ctx.color(100, 0, 200);
-
       return pens;
     case '3':
       pens.length = 0;
-      for (let i = 0; i < 5; i += 1) {
-        pens.push(new Pen(q5, 0, 250, ctx.color(0)));
+      for (let i = 0; i < 4; i += 1) {
+        if (i > 0 && i < 3) {
+          color = 'rgb(200,0,200)';
+        } else {
+          color = 'rgb(250,130,0)';
+        }
+        pens.push(
+          new Pen({
+            ctx,
+            x: (i + 3.5)
+             * (parseInt(canvas.width, 10) / 10),
+            y: -canvas.height / 4,
+            c: color
+          })
+        );
       }
-
-      pens[0].x = width / 2;
-      pens[0].y = (3.5 * ctx.height) / 5;
-      pens[0].color = ctx.color(100, 0, 200);
-      pens[1].x = width / 2 - 120;
-      pens[1].y = (3.5 * ctx.height) / 5;
-      pens[1].color = ctx.color(250, 100, 0);
-      pens[2].x = width / 2 + 120;
-      pens[2].y = (3.5 * ctx.height) / 5;
-      pens[2].color = q5.color(250, 100, 0);
-      pens[3].x = q5.width - 10;
-      pens[3].y = (3 * q5.height) / 5;
-      pens[3].color = q5.color(250, 100, 0);
-      pens[4].x = q5.width - 10;
-      pens[4].y = (2 * q5.height) / 5;
-      pens[4].color = q5.color(250, 100, 0);
-
       return pens;
     case '4':
       pens.length = 0;
       for (let i = 0; i < 6; i += 1) {
-        pens.push(new Pen(q5, 0, 250, q5.color(0)));
+        if (i === 0 || i === 3 || i === 4 || i === 5) {
+          color = 'rgb(250,130,0)';
+        } else {
+          color = 'rgb(200,0,200)';
+        }
+        pens.push(
+          new Pen({
+            ctx,
+            x: (i + 3.5)
+             * (parseInt(canvas.width, 10) / 10),
+            y: canvas.height / 4,
+            c: color
+          })
+        );
       }
-
-      pens[0].x = q5.width / 2 + 80;
-      pens[0].y = (3.5 * q5.height) / 5;
-      pens[0].color = q5.color(100, 0, 200);
-      pens[1].x = q5.width / 2;
-      pens[1].y = (3.5 * q5.height) / 5;
-      pens[1].color = q5.color(250, 100, 0);
-      pens[2].x = q5.width / 2;
-      pens[2].y = (1.5 * q5.height) / 5;
-      pens[2].color = q5.color(250, 100, 0);
-      pens[3].x = q5.width / 2 - 80;
-      pens[3].y = (1.5 * q5.height) / 5;
-      pens[3].color = q5.color(100, 0, 200);
-      pens[4].x = q5.width / 2 - 80;
-      pens[4].y = (3.5 * q5.height) / 5;
-      pens[4].color = q5.color(100, 0, 200);
-      pens[5].x = q5.width / 2 + 80;
-      pens[5].y = (1.5 * q5.height) / 5;
-      pens[5].color = q5.color(100, 0, 200);
+      pens[4].x = (49 * parseInt(canvas.width, 10)) / 50;
+      pens[4].y = -canvas.height / 8;
+      pens[5].x = (49 * parseInt(canvas.width, 10)) / 50;
+      pens[5].y = canvas.height / 8;
       return pens;
     case '5':
       pens.length = 0;
-      for (let i = 0; i < 6; i += 1) {
-        pens.push(new Pen(q5, 0, 250, q5.color(0)));
+      for (let i = 0; i < 10; i += 1) {
+        if (i === 4 || i === 5) {
+          color = 'rgb(250,130,0)';
+        } else {
+          color = 'rgb(200,0,200)';
+        }
+        pens.push(
+          new Pen({
+            ctx,
+            x: (Math.floor(i / 2))
+             * (parseInt(canvas.width, 10) / 10) + canvas.width / 3.3,
+            y: (canvas.height / 4) - (i % 2) * (canvas.height / 2),
+            c: color
+          })
+        );
       }
-      pens[0].x = 3 * (q5.width / 4);
-      pens[0].y = (1 * q5.height) / 5;
-      pens[0].color = q5.color(100, 0, 200);
-
-      pens[1].x = 1 * (q5.width / 4);
-      pens[1].y = (4 * q5.height) / 5;
-      pens[1].color = q5.color(100, 0, 200);
-
-      pens[2].x = 1 * (q5.width / 4);
-      pens[2].y = (1 * q5.height) / 5;
-      pens[2].color = q5.color(100, 0, 200);
-
-      pens[3].x = 3 * (q5.width / 4);
-      pens[3].y = (4 * q5.height) / 5;
-      pens[3].color = q5.color(100, 0, 200);
-
-      pens[4].x = 6;
-      pens[4].y = (2 * q5.height) / 6;
-      pens[4].color = q5.color(250, 100, 0);
-
-      pens[5].x = 6;
-      pens[5].y = (4 * q5.height) / 6;
-      pens[5].color = q5.color(250, 100, 0);
-
       return pens;
-      */
+
+    case '6':
+      pens.length = 0;
+      for (let i = 0; i < 10; i += 1) {
+        if (i === 4 || i === 5) {
+          color = 'rgb(250,130,0)';
+        } else {
+          color = 'rgb(200,0,200)';
+        }
+        pens.push(
+          new Pen({
+            ctx,
+            x: (Math.floor(i / 2))
+               * (parseInt(canvas.width, 10) / 10) + canvas.width / 3.3,
+            y: (canvas.height / 4) - (i % 2) * (canvas.height / 2),
+            c: color
+          })
+        );
+      }
+      return pens;
+
     default:
       return pens;
   }

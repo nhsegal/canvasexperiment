@@ -26,7 +26,7 @@ const chain = new Chain({
 
 const pens = [];
 let level = null;
-let mySound;
+let end = 'fixed';
 
 canvas.addEventListener('mousedown', (e)=>{
   grabChain(canvas, chain, e);
@@ -44,8 +44,14 @@ document.querySelector('#resetButton').addEventListener('click', ()=>reset(chain
 document.querySelectorAll('select[name="level"]').forEach((option) => {
   option.addEventListener('change', (e) => {
     level = e.target.value;
-    levelSet(level, pens, ctx, canvas, scale);
+    levelSet(level, pens, ctx, canvas);
     reset(chain, pens);
+  });
+});
+
+document.querySelectorAll('input[name="right_end"]').forEach((option) => {
+  option.addEventListener('change', (event) => {
+    end = event.target.value;
   });
 });
 
@@ -53,13 +59,11 @@ const draw = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground(canvas, width, height, scale);
   ctx.setTransform(1, 0, 0, 1, 0, canvas.height / 2);
-  chain.move('fixed', true);
-  chain.display();
+  chain.move(end);
+  chain.display(end);
   if (pens.length) {
     pens.forEach((pen) => {
-      if (pen.hitCheck(chain)) {
-        mySound.play();
-      }
+      pen.hitCheck(chain);
       pen.display();
     });
   }
@@ -67,74 +71,3 @@ const draw = () => {
 };
 
 draw();
-/*
-
-q5.setup = () => {
-
-  // Event Listeners
-  document.querySelectorAll('input[name="right_end"]').forEach((option) => {
-    option.addEventListener('change', (event) => {
-      end = event.target.value;
-    });
-  });
-
-};
-q5.noLoop();
-q5.draw = () => {
-  q5.background(220);
-  q5.fill(0);
-  q5.stroke(0);
-  q5.strokeWeight(1);
-  q5.line(0, Math.floor(q5.height / 2) + 0.5, q5.width, Math.floor(q5.height / 2) + 0.5);
-  q5.line(0, Math.floor(q5.height / 3) + 0.5, q5.width, Math.floor(q5.height / 3) + 0.5);
-  q5.line(
-    0,
-    Math.floor((2 * q5.height) / 3) + 0.5,
-    q5.width,
-    Math.floor((2 * q5.height) / 3) + 0.5
-  );
-  q5.line(0, Math.floor(q5.height / 6) + 0.5, q5.width, Math.floor(q5.height / 6) + 0.5);
-  q5.line(
-    0,
-    Math.floor((5 * q5.height) / 6) + 0.5,
-    q5.width,
-    Math.floor((5 * q5.height) / 6) + 0.5
-  );
-
-  if (dragging) {
-    chain.links[0].fy = q5.mouseY - q5.height / 2;
-  }
-  chain.links[0].py = chain.links[0].y;
-  chain.links[0].y = chain.links[0].fy;
-  chain.move(end, dragging);
-
-  q5.noStroke();
-
-  if (pens.length) {
-    pens.forEach((pen) => {
-      if (pen.hitCheck(chain)) {
-        mySound.play();
-      }
-      pen.display();
-    });
-  }
-  chain.display(end, dragging);
-};
-
-q5.mousePressed = () => {
-  if (
-    q5.dist(
-      chain.links[0].x,
-      chain.links[0].y + q5.height / 2,
-      q5.mouseX,
-      q5.mouseY
-    )
-    < (3 * chain.linkSize) / 2
-  ) {
-    dragging = true;
-  }
-};
-q5.mouseReleased = () => {
-  dragging = false;
-};
-*/
