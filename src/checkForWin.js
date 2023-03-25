@@ -14,18 +14,28 @@ const checkPurple = (pens) => {
   return pens.filter(isPurple).every((pen)=>pen.hit);
 };
 
-const checkForWin = (pens) => {
-  if (!checkOranges(pens)) {
-    console.log('you lose');
-    return;
+const modalMsg = document.querySelector('.modal-msg');
+const modal = document.querySelector('.modal');
+
+const checkForWin = (pens, ready) => {
+  if (ready) {
+    if (!checkOranges(pens)) {
+      modalMsg.textContent = 'Close! Try again.';
+      modal.style.display = 'block';
+      return false;
+    }
+    if (checkPurple(pens)) {
+      setInterval(()=>{
+        if (checkOranges(pens)) {
+          modalMsg.textContent = 'Nice work!';
+          modal.style.display = 'block';
+          return true;
+        }
+        return null;
+      }, 2000);
+    }
   }
-  if (checkPurple(pens)) {
-    setInterval(()=>{
-      if (checkOranges(pens)) {
-        console.log('You win');
-      }
-    }, 2000);
-  }
+  return null;
 };
 
 export default checkForWin;

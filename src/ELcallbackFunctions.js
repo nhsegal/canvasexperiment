@@ -11,6 +11,7 @@ const reset = (chain, pens) => {
       pen.hit = false;
     });
   }
+  return false;
 };
 
 const grabChain = (canvas, chain, e) => {

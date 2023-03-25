@@ -28,9 +28,11 @@ const chain = new Chain({
 const pens = [];
 let level = null;
 let end = 'fixed';
+let ready = false;
 
 canvas.addEventListener('mousedown', (e)=>{
   grabChain(canvas, chain, e);
+  ready = true;
 });
 
 canvas.addEventListener('mousemove', (e) => {
@@ -41,12 +43,16 @@ canvas.addEventListener('mouseup', (e) => {
   releaseChain(chain, e);
 });
 
+canvas.addEventListener('mouseout', (e) => {
+  releaseChain(chain, e);
+});
+
 document.querySelector('#resetButton').addEventListener('click', ()=>reset(chain, pens));
 document.querySelectorAll('select[name="level"]').forEach((option) => {
   option.addEventListener('change', (e) => {
     level = e.target.value;
     levelSet(level, pens, ctx, canvas);
-    reset(chain, pens);
+    ready = reset(chain, pens);
   });
 });
 
@@ -54,6 +60,11 @@ document.querySelectorAll('input[name="right_end"]').forEach((option) => {
   option.addEventListener('change', (event) => {
     end = event.target.value;
   });
+});
+
+document.querySelector('.close').addEventListener('click', ()=>{
+  document.querySelector('.modal').style.display = 'none';
+  reset(chain, pens);
 });
 
 const draw = () => {
@@ -67,7 +78,7 @@ const draw = () => {
       pen.hitCheck(chain);
       pen.display();
     });
-    checkForWin(pens);
+    checkForWin(pens, ready);
   }
   window.requestAnimationFrame(draw);
 };
