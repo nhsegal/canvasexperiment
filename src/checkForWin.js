@@ -11,7 +11,6 @@ const checkOranges = (pens) => {
 };
 
 const checkPurple = (pens) => {
-  console.log(pens.filter(isPurple).every((pen)=>pen.hit));
   return pens.filter(isPurple).every((pen)=>pen.hit);
 };
 
@@ -26,15 +25,18 @@ const checkForWin = (pens, ready) => {
       return false;
     }
     if (checkPurple(pens)) {
-      setInterval(()=>{
+      setTimeout(()=>{
         if (checkOranges(pens)) {
           modalMsg.textContent = 'Nice work!';
           modal.style.display = 'block';
+          ready = false;  // eslint-disable-line
           return true;
         }
         return null;
       }, 2000);
     }
+  } else {
+    modal.style.display = 'none';
   }
   return null;
 };

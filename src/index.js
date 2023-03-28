@@ -81,8 +81,8 @@ const draw = () => {
       pen.hitCheck(chain);
       pen.display();
     });
-    checkForWin(pens, ready);
   }
+  checkForWin(pens, ready);
   window.requestAnimationFrame(draw);
 };
 
