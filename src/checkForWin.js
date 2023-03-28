@@ -11,6 +11,7 @@ const checkOranges = (pens) => {
 };
 
 const checkPurple = (pens) => {
+  console.log(pens.filter(isPurple).every((pen)=>pen.hit));
   return pens.filter(isPurple).every((pen)=>pen.hit);
 };
 

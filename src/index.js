@@ -63,8 +63,11 @@ document.querySelectorAll('input[name="right_end"]').forEach((option) => {
 });
 
 document.querySelector('.close').addEventListener('click', ()=>{
-  document.querySelector('.modal').style.display = 'none';
+  level = document.querySelector('select[name="level"]').selectedIndex;
+  ready = false;
   reset(chain, pens);
+  levelSet(level, pens, ctx, canvas);
+  document.querySelector('.modal').style.display = 'none';
 });
 
 const draw = () => {

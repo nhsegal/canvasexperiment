@@ -6,9 +6,10 @@ const reset = (chain, pens) => {
     arr[i].py = 0;
     arr[i].fy = 0;
   });
+  chain.isDragging = false;
   if (pens.length) {
-    pens.forEach((pen)=>{
-      pen.hit = false;
+    pens.forEach((pen, index, arr)=>{
+      arr[index].hit = false;
     });
   }
   return false;
