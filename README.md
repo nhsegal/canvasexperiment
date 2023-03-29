@@ -1,4 +1,4 @@
 # The Wave Game
-I originally wrote this using p5.js, then I refactored it to use webpack, then refactored it again to use the html canvas element without the p5.js library. 
+I originally wrote this using p5.js, then I refactored it to take advantage of webpack and linting. Then, partly because the code bundles were so big, I refactored the sim again to use the html canvas element without the p5.js library. It is my first real program directly manipulating the canvas.
 
-It is clearly indebted to PhET's Waves on a String sim, but I believe it has some worthwhile, novel features. The challenges direct the user's attention to how waves reflect and interfere.
+The game is based on some demos I would do with a slinky and paper cups. It is clearly indebted to PhET's Waves on a String sim, but I believe it has some worthwhile, novel features. The levels direct the user's attention to how waves reflect and interfere and how these relate to standing waves.
