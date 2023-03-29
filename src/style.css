@@ -77,15 +77,17 @@ select {
   width: 25%;
   font-size: 100%;
   color: #000000;
+  border-radius: 5px;
+  cursor: default;
 }
 .close {
-  float: right;
-  font-size: 150%;
-}
 
+  font-size: 100%;
+  
+}
 .close:focus {
   color: #000;
-  float: right;
+
   text-decoration: none;
   cursor: pointer;
 }
