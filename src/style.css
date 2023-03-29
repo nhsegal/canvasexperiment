@@ -77,7 +77,6 @@ select {
   width: 25%;
   font-size: 100%;
   color: #000000;
-  cursor: context-menu;
 }
 .close {
   float: right;

@@ -66,7 +66,6 @@ document.querySelector('.close').addEventListener('click', ()=>{
   level = document.querySelector('select[name="level"]').selectedIndex;
   ready = false;
   reset(chain, pens);
-  levelSet(level, pens, ctx, canvas);
   document.querySelector('.modal').style.display = 'none';
 });
 

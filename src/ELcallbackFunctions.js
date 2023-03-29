@@ -48,8 +48,8 @@ const releaseChain = (chain, e) => {
 
 const levelSet = (level, pens, ctx, canvas) => {
   let color = 'rgb(0,0,0)';
-  switch (level) {
-    case '1':
+  switch (+level) {
+    case 1:
       pens.length = 0;
       for (let i = 0; i < 4; i += 1) {
         if (i === 3) {
@@ -68,7 +68,7 @@ const levelSet = (level, pens, ctx, canvas) => {
         );
       }
       return pens;
-    case '2':
+    case 2:
       pens.length = 0;
       for (let i = 0; i < 4; i += 1) {
         if (i !== 3) {
@@ -87,7 +87,7 @@ const levelSet = (level, pens, ctx, canvas) => {
         );
       }
       return pens;
-    case '3':
+    case 3:
       pens.length = 0;
       for (let i = 0; i < 4; i += 1) {
         if (i > 0 && i < 3) {
@@ -106,7 +106,7 @@ const levelSet = (level, pens, ctx, canvas) => {
         );
       }
       return pens;
-    case '4':
+    case 4:
       pens.length = 0;
       for (let i = 0; i < 6; i += 1) {
         if (i === 0 || i === 3 || i === 4 || i === 5) {
@@ -129,7 +129,7 @@ const levelSet = (level, pens, ctx, canvas) => {
       pens[5].x = (49 * parseInt(canvas.width, 10)) / 50;
       pens[5].y = canvas.height / 8;
       return pens;
-    case '5':
+    case 5:
       pens.length = 0;
       for (let i = 0; i < 10; i += 1) {
         if (i === 4 || i === 5) {
@@ -148,8 +148,7 @@ const levelSet = (level, pens, ctx, canvas) => {
         );
       }
       return pens;
-
-    case '6':
+    case 6:
       pens.length = 0;
       for (let i = 0; i < 26; i += 1) {
         if (i === 0 || i === 1
@@ -171,8 +170,8 @@ const levelSet = (level, pens, ctx, canvas) => {
         );
       }
       return pens;
-
     default:
+      pens.length = 0;
       return pens;
   }
 };

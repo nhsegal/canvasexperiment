@@ -19,17 +19,17 @@ const modal = document.querySelector('.modal');
 
 const checkForWin = (pens, ready) => {
   if (ready) {
-    if (!checkOranges(pens)) {
+    if (pens.length && !checkOranges(pens)) {
       modalMsg.textContent = 'Close! Try again.';
       modal.style.display = 'block';
       return false;
     }
-    if (checkPurple(pens)) {
+    if (pens.length && checkPurple(pens)) {
       setTimeout(()=>{
         if (checkOranges(pens)) {
           modalMsg.textContent = 'Nice work!';
           modal.style.display = 'block';
-          ready = false;  // eslint-disable-line
+          // ready = false;  // eslint-disable-line
           return true;
         }
         return null;
