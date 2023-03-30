@@ -7,9 +7,13 @@ import {
   shakeChain,
   releaseChain,
   reset,
-  levelSet
+  levelSet,
+  setSpeed
 } from './ELcallbackFunctions';
 import checkForWin from './checkForWin';
+import Link from './Link';
+
+const res = 4;
 
 const width = 8 * 120;
 const height = 300;
@@ -19,10 +23,11 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const chain = new Chain({
   ctx,
-  length: scale * width - 24,
+  length: scale * width - 3 * 8,
   dx: 8,
   dt: 8,
-  scale
+  scale,
+  res
 });
 
 const pens = [];
@@ -59,6 +64,29 @@ document.querySelectorAll('select[name="level"]').forEach((option) => {
 document.querySelectorAll('input[name="right_end"]').forEach((option) => {
   option.addEventListener('change', (event) => {
     end = event.target.value;
+  });
+});
+
+document.querySelectorAll('input[name="speed"]').forEach((option) => {
+  option.addEventListener('change', (event) => {
+    chain.res = setSpeed(event.target.value);
+    chain.length = (scale * width - 3 * 8) * chain.res;
+    chain.links.length = 0;
+    chain.links.push(new Link({
+      ctx: chain.ctx,
+      x: chain.linkSize,
+      linkSize: 2 * chain.linkSize
+    }));
+
+    for (let i = 1; i < chain.length / chain.linkSize; i += 1) {
+      chain.links.push(new Link(
+        {
+          ctx: chain.ctx,
+          x: (i * chain.linkSize) / chain.res + (2 * chain.linkSize),
+          linkSize: chain.linkSize
+        }
+      ));
+    }
   });
 });
 

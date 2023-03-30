@@ -3,19 +3,20 @@ import circle from './circle';
 
 class Chain {
   constructor({
-    ctx, length, dx, dt, scale
+    ctx, length, dx, dt, scale, res
   }) {
     this.ctx = ctx;
-    this.length = length;
+    this.length = length * res;
     this.linkSize = dx;
     this.links = [];
     this.dt = dt;
     this.isDragging = false;
     this.scale = scale;
+    this.res = res;
 
     this.links.push(new Link({
       ctx: this.ctx,
-      x: this.linkSize * 2,
+      x: this.linkSize,
       linkSize: 2 * this.linkSize
     }));
 
@@ -23,7 +24,7 @@ class Chain {
       this.links.push(new Link(
         {
           ctx: this.ctx,
-          x: i * dx + 2 * this.linkSize,
+          x: (i * dx) / this.res + (2 * this.linkSize),
           linkSize: this.linkSize
         }
       ));
@@ -32,10 +33,11 @@ class Chain {
 
   display(end) {
     const ctx = this.ctx;
+    const res = this.res;
     for (let i = 1; i < this.links.length - 1; i += 1) {
-      if (i % 48 === 0) {
+      if (i % (48 * res) === 0) {
         this.links[i].display('rgb(250,235,0');
-      } else if (i % (2) === 0) {
+      } else if (i % (2 * res) === 0) {
         this.links[i].display('rgb(0,0,0');
       }
     }

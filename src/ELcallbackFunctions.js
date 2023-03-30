@@ -176,6 +176,20 @@ const levelSet = (level, pens, ctx, canvas) => {
   }
 };
 
+const setSpeed = (val) => {
+  switch (val) {
+    case 'slow':
+      return 2;
+    case 'medium':
+      return 1;
+    case 'fast':
+      return 0.5;
+    default:
+      console.log('error with speed');
+      return null;
+  }
+};
+
 export {
-  reset, grabChain, shakeChain, releaseChain, levelSet
+  reset, grabChain, shakeChain, releaseChain, levelSet, setSpeed
 };

@@ -34,18 +34,25 @@ class Pen {
   hitCheck(chain) {
     if (
       ((this.x
-      > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
+      > chain.links[
+        (parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10))].x
+        - 4 * chain.linkSize * chain.res
       && this.x
-        < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
+        < chain.links[parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10)].x
+        + 4 * chain.linkSize * chain.res
       && this.y
-       > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y - 2 * chain.linkSize
+       > chain.links[parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10)].y
+       - 2.5 * chain.linkSize
      && (this.y < -2))
       || (this.x
-        > chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x - 2 * chain.linkSize
+        > chain.links[parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10)].x
+        - 4 * chain.linkSize
         && this.x
-          < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].x + 2 * chain.linkSize
+          < chain.links[parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10)].x
+          + 4 * chain.linkSize
         && this.y
-         < chain.links[parseInt((this.x / chain.linkSize) - 2, 10)].y + 2 * chain.linkSize
+         < chain.links[parseInt((this.x / (chain.linkSize / chain.res)) - 2, 10)].y
+         + 2.5 * chain.linkSize
        && (this.y > 0)))
       && this.hit === false
 

@@ -17,6 +17,26 @@
     <div id="canvas_container"></div>
     <div id="controls" class="controls">
       <button id="resetButton">Reset</button>
+
+      <div>
+        Wave Speed: <br />
+        <span class="wave-speed">
+          <input
+            type="radio"
+            id="slow"
+            name="speed"
+            value="slow"
+            checked/>
+          <label for="slow">Slow</label><br />
+          <input type="radio" id="medium" name="speed" value="medium" />
+          <label for="medium">Medium</label><br />
+          <input type="radio" id="fast" name="speed" value="fast" />
+          <label for="fast">Fast</label><br />
+       <br />
+        </span>
+      </div>
+
+
       <div class="center">
         <label for="level">Level:</label>
         <select name="level" id="level">
@@ -29,9 +49,10 @@
           <option value="6">6</option>
         </select>
       </div>
+     
       <div>
         Right End: <br />
-        <span>
+        <span class="end-options">
           <input
             type="radio"
             id="fixed"

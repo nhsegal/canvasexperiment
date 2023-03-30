@@ -80,14 +80,14 @@ select {
   border-radius: 5px;
   cursor: default;
 }
-.close {
 
-  font-size: 100%;
-  
-}
 .close:focus {
   color: #000;
-
   text-decoration: none;
   cursor: pointer;
+}
+
+.wave-speed, .end-options{
+  position: relative;
+  left: 20px;
 }
