@@ -51,7 +51,7 @@ const levelSet = (level, pens, ctx, canvas) => {
   switch (+level) {
     case 1:
       pens.length = 0;
-      for (let i = 0; i < 1; i += 1) { // 4
+      for (let i = 0; i < 4; i += 1) {
         if (i === 3) {
           color = 'rgb(250,130,0)';
         } else {
