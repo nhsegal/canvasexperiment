@@ -16,7 +16,7 @@ class Chain {
 
     this.links.push(new Link({
       ctx: this.ctx,
-      x: this.linkSize,
+      x: 2 * this.linkSize,
       linkSize: 2 * this.linkSize
     }));
 

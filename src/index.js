@@ -74,7 +74,7 @@ document.querySelectorAll('input[name="speed"]').forEach((option) => {
     chain.links.length = 0;
     chain.links.push(new Link({
       ctx: chain.ctx,
-      x: chain.linkSize,
+      x: 2 * chain.linkSize,
       linkSize: 2 * chain.linkSize
     }));
 
